@@ -1,1 +1,11 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photo-card {
+    margin: 10 10 10 10;
+}

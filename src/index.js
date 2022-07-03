@@ -7,13 +7,10 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const form = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 const createdGallery = new SimpleLightbox('.gallery a');
+const API_KEY = '?key=28400879-5f1a3988aabd52ac255ecba31';
+const per_page = 'per_page=40';
 
 axios.defaults.baseURL = 'https://pixabay.com';
-// axios.defaults.headers.common.key ="28400879-5f1a3988aabd52ac255ecba31";
-axios.defaults.headers.common.image_type = 'photo';
-axios.defaults.headers.common.orientation = 'horizontal';
-axios.defaults.headers.common.safesearch = 'true';
-axios.defaults.headers.common.per_page = 'per_page=40';
 
 let page = 1;
 let query = '';
@@ -34,11 +31,10 @@ function onSearch(e) {
 }
 
 function fetchImg(query, page) {
-    axios
-        .get(`/api`).then(res => res.data).catch(error => console.log)
-    .then(res => {          
-    createCardMarkup(res.data.hits);
-    });
+  axios
+    .get(`/api${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch-true&page=${page}&${per_page}`).then(res => {
+      createCardMarkup(res.data.hits)
+    }).catch(error => console.log);
 }
 
 function createCardMarkup(arr) {
@@ -68,7 +64,7 @@ function createCardMarkup(arr) {
   gallery.insertAdjacentHTML('beforeend', cardMarkup);
 }
 const options = {
-  rootMargin: '150px',
+  rootMargin: '300px',
   threshold: 1.0,
 };
 
