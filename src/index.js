@@ -9,7 +9,7 @@ const gallery = document.querySelector('.gallery');
 const createdGallery = new SimpleLightbox('.gallery a');
 
 axios.defaults.baseURL = 'https://pixabay.com';
-axios.defaults.headers.common.key ="28400879-5f1a3988aabd52ac255ecba31";
+// axios.defaults.headers.common.key ="28400879-5f1a3988aabd52ac255ecba31";
 axios.defaults.headers.common.image_type = 'photo';
 axios.defaults.headers.common.orientation = 'horizontal';
 axios.defaults.headers.common.safesearch = 'true';
