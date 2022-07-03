@@ -30,11 +30,14 @@ function onSearch(e) {
     observer.observe(document.querySelector('.scroll-guard'));
 }
 
-function fetchImg(query, page) {
-  axios
+async function fetchImg(query, page) {
+ const fetch = await axios
     .get(`/api${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch-true&page=${page}&${per_page}`).then(res => {
+      if (res.data.hits === '[]') {
+        Notify.failure("Sorry, there are no images matching your search query. Please try again.")
+      }
       createCardMarkup(res.data.hits)
-    }).catch(error => console.log);
+    }).catch(err => Notify.failure(err))
 }
 
 function createCardMarkup(arr) {
