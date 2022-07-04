@@ -36,9 +36,8 @@ async function fetchImg(query, page) {
   if (response.data.total === 0) {
     Notify.failure("Sorry, there are no images matching your search query. Please try again.");
   }
-  document.querySelector('body').insertAdjacentHTML('beforeend',`<div class="scroll-guard"></div>`)
+  document.querySelector('body').insertAdjacentHTML('beforeend',``)
   return createCardMarkup(response.data.hits);
-  
 }
 
 function createCardMarkup(arr) {
@@ -62,7 +61,7 @@ function createCardMarkup(arr) {
               </p>
             </div>
           </div>
-          </a>`        
+          </a><div class="scroll-guard"></div>`        
       ).join('');
     
   gallery.insertAdjacentHTML('beforeend', cardMarkup);
