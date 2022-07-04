@@ -10,6 +10,7 @@ const createdGallery = new SimpleLightbox('.gallery a');
 const API_KEY = '?key=28400879-5f1a3988aabd52ac255ecba31';
 const per_page = 'per_page=40';
 
+
 axios.defaults.baseURL = 'https://pixabay.com';
 
 let page = 1;
@@ -17,7 +18,7 @@ let query = '';
 
 form.addEventListener('submit', onSearch);
 
-function onSearch(e) {
+async function onSearch(e) {
       e.preventDefault();
     gallery.innerHTML ='';
     query = e.currentTarget.searchQuery.value.trim();
@@ -26,18 +27,18 @@ function onSearch(e) {
     if(query === ''){Notify.failure('The search string cannot be empty.')
     return};
     
-    fetchImg(query, page);
-    observer.observe(document.querySelector('.scroll-guard'));
+  await fetchImg(query, page);
+  observer.observe(document.querySelector('.scroll-guard'));
 }
 
 async function fetchImg(query, page) {
- const fetch = await axios
-    .get(`/api${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch-true&page=${page}&${per_page}`).then(res => {
-      if (res.data.hits === '[]') {
-        Notify.failure("Sorry, there are no images matching your search query. Please try again.")
-      }
-      createCardMarkup(res.data.hits)
-    }).catch(err => Notify.failure(err))
+  const response = await axios.get(`/api${API_KEY}&q=${query}&image_type=photo&orientation=horizontal&safesearch-true&page=${page}&${per_page}`);
+  if (response.data.total === 0) {
+    Notify.failure("Sorry, there are no images matching your search query. Please try again.");
+  }
+  document.querySelector('body').insertAdjacentHTML('beforeend',`<div class="scroll-guard"></div>`)
+  return createCardMarkup(response.data.hits);
+  
 }
 
 function createCardMarkup(arr) {
@@ -65,9 +66,10 @@ function createCardMarkup(arr) {
       ).join('');
     
   gallery.insertAdjacentHTML('beforeend', cardMarkup);
-}
+};
+
 const options = {
-  rootMargin: '300px',
+  rootMargin: '200px',
   threshold: 1.0,
 };
 
@@ -85,8 +87,8 @@ const observer = new IntersectionObserver(entries => {
 
 
 
+  // scrollGuard.style.display = 'block';
+  // scrollGuard.style.display = 'none';
 
 
 
-
-// fetch('https://pixabay.com/api/?key=28400879-5f1a3988aabd52ac255ecba31&q=cat').then(res =>console.log(res.json()))
