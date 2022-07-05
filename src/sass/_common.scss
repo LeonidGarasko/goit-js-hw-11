@@ -1,12 +1,26 @@
-@import '~node_modules/modern-normalize/modern-normalize.css';
+:root {
+    --spacing: 8px;
+    --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    --animation-duration: 250ms;
+}
 
+img {
+    display: block;
+    max-width: 100%;
+}
 
-.gallery {
-    display: grid;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        grid-gap: 20px;
-    }
+body {
+    font-family: Helvetica, Sans-Serif;
+    color: #444444;
+    font-size: 9pt;
+    background-color: #FAFAFA;
+    background-color: #eeeeee;
+    padding: 60px 15px 0 15px;
 
+    line-height: 1.5;
+}
 
-
+a {
+    text-decoration: none;
+    color: #444444;
+}

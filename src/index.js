@@ -54,12 +54,13 @@ function onSearch(e){
             resetForm();
           return
          };
-         
+        
           galleryWrap.insertAdjacentHTML('beforeend', createCardMarkup(response.data.hits));
           successMessage(response.data.totalHits);
           gallery.refresh();
         })
-      .catch(error => console.log(error));    
+    .catch(error => console.log(error));   
+  observer.observe(document.querySelector('.scroll-guard'));
 };
 
 
@@ -72,7 +73,6 @@ const options = {
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      console.log('entry');
       
       page += 1;
             
@@ -90,7 +90,7 @@ const observer = new IntersectionObserver(entries => {
   });
 }, options);
 
-observer.observe(document.querySelector('.scroll-guard'));
+ 
 
 function notFoundMessage(){
   Notify.failure("Sorry, there are no images matching your search query. Please try again.")
