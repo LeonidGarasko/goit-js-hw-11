@@ -2,10 +2,11 @@
 
 
 .gallery {
-    display: flex;
-    flex-wrap: wrap;
-}
+    display: grid;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 20px;
+    }
 
-.photo-card {
-    margin: 10 10 10 10;
-}
+
+
